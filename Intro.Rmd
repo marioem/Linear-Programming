@@ -73,7 +73,8 @@ optimum <-  lp(direction="min",
                const.mat = A,
                const.dir = constranints_direction,
                const.rhs = B,
-               all.int = T)
+               all.int = T,
+               compute.sens=TRUE) # just to record the possibility, interpreting sensitivity with all.int is hard
 # Print status: 0 = success, 2 = no feasible solution
 print(optimum$status)
 ```
@@ -83,6 +84,20 @@ print(optimum$status)
 best_sol <- optimum$solution
 names(best_sol) <- c("x_4p", "x_3p", "x_w") 
 print(best_sol)
+```
+```{r}
+# Sensitivity
+optimum$sens.coef.from
+optimum$sens.coef.to
+```
+
+```{r}
+# Duals of the constraints and variables are mixed
+optimum$duals
+
+# Duals lower and upper limits
+optimum$duals.from
+optimum$duals.to
 ```
 
 ```{r}
